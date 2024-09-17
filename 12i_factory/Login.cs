@@ -15,6 +15,19 @@ namespace _12i_factory
         public Login()
         {
             InitializeComponent();
+            Start();
+        }
+        void Start() {
+            label1.Text = "Felhasználónév:";
+            label2.Text = "Jelszó:";
+            label1.AutoSize = true;
+            label2.AutoSize = true;
+            textBox2.PasswordChar = '*';
+
+            button1.Click += (s, e) => { 
+                
+            };
+
         }
     }
 }
