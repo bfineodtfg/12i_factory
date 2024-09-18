@@ -12,12 +12,14 @@ namespace _12i_factory
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        user User;
+        int money;
+        public Form1(user User)
         {
+            this.User = User;
             InitializeComponent();
             Start();
         }
-        int money;
         int grassUpgrade = 100;
         int factoryUpgrade = 300;
         int factoryLevel = 0;
@@ -25,7 +27,7 @@ namespace _12i_factory
         int autoPrice = 400;
         List<grass> items = new List<grass>();
         void Start() {
-            updateMoney(800000000);
+            updateMoney(User.points);
             updatePriceFactory(factoryUpgrade);
             updatePrice(grassUpgrade);
             updatePriceAuto(autoPrice);
@@ -128,11 +130,11 @@ namespace _12i_factory
                 {
                     if (item.Top < belt2.Top)
                     {
-                        item.Top+=2;
+                        item.Top+=8;
                     }
                     else if (item.Right <= end.Left)
                     {
-                        item.Left+=2;
+                        item.Left+=8;
                     }
                     else 
                     {
@@ -157,6 +159,7 @@ namespace _12i_factory
         }
         void updateMoney(int number) {
             money += number;
+            User.points = money;
             label1.Text = $"Pénz: {money}$";
         }
     }

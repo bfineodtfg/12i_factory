@@ -61,6 +61,22 @@ namespace _12i_factory
                 MessageBox.Show("Nem sikerült a regisztráció");
             }
         }
+        public void updatePoints(user one) {
+            try
+            {
+                connection.Open();
+                string query = $"UPDATE {tableName} SET points={one.points} WHERE id={one.id}";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                command.Dispose();
+                connection.Close();
+                MessageBox.Show($"Mentett\npontok:{one.points}");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Nem sikerült a mentés");
+            }
+        }
 
     }
 }

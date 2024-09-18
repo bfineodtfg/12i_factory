@@ -34,7 +34,12 @@ namespace _12i_factory
                 {
                     if (textBox1.Text == item.username && textBox2.Text == item.password)
                     {
-                        new Form1();
+                        Form1 form = new Form1(item);
+                        form.Show();
+                        form.FormClosed += (ss, ee) => {
+                            db.updatePoints(item);
+                            Application.Exit();
+                        };
                         this.Hide();
                     }
                 }
