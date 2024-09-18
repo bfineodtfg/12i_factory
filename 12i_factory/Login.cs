@@ -22,11 +22,39 @@ namespace _12i_factory
             label2.Text = "Jelszó:";
             label1.AutoSize = true;
             label2.AutoSize = true;
+            loginButton.Text = "Bejelentkezés";
+            registerButton.Text = "Regisztráció";
             textBox2.PasswordChar = '*';
+            databaseHandler db = new databaseHandler();
 
-            button1.Click += (s, e) => { 
-                
+            loginButton.Click += (s, e) => {
+                db.readAll();
+
+                foreach (user item in user.users)
+                {
+                    if (textBox1.Text == item.username && textBox2.Text == item.password)
+                    {
+                        new Form1();
+                        this.Hide();
+                    }
+                }
             };
+            registerButton.Click += (s, e) => {
+                if (textBox1.Text.Length < 3)
+                {
+                    MessageBox.Show("Túl rövid a felhasználónév");
+                }
+                else if (textBox2.Text.Length < 3) {
+                    MessageBox.Show("Túl rövid a jelszó");
+                }
+                else
+                {
+                    db.registerUser(textBox1.Text, textBox2.Text);
+                    MessageBox.Show("Sikeres regisztráció!");
+                }
+            };
+
+
 
         }
     }
